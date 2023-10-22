@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+  mysql:
+    image: mysql:5
+    environment:
+      - MYSQL_DATABASE=my_db
+      - MYSQL_ROOT_PASSWORD=123456
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
+  mysqlclient:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - PMA_HOST=mysql
+    ports:
+      - '8080:80'
+    depends_on: 
+      - mysql

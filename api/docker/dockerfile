@@ -1,0 +1,32 @@
+ARG is_dev=true
+
+#Download base image ubuntu 16.04
+FROM node:12.19.1-slim
+
+#Mainterner
+LABEL MAINTAINER = "Trade EC"
+
+
+# install dependencies
+WORKDIR /var/www/html/nest_microservice_boilerplate
+COPY package.json package-lock.json* ./
+RUN npm cache clean --force && npm install
+
+# set .env
+#RUN if [ "$is_dev" = 'true' ]; then; ARG dotenv=.env.dev; fi
+#RUN if [ "$is_dev" = 'false' ]; then; ARG dotenv=.env.example; fi
+ARG dotenv=.env.example
+ADD $dotenv .env
+
+# copy app source to image _after_ npm install so that
+# application code changes don't bust the docker cache of npm install step
+COPY . /var/www/html/nest_microservice_boilerplate
+
+# TypeScript
+RUN tsc
+
+# set application PORT and expose docker PORT, 80 is what Elastic Beanstalk expects
+ENV PORT 3016
+EXPOSE 3016
+
+CMD [ "npm", "run", "start:prod" ]
