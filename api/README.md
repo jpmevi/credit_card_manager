@@ -169,11 +169,6 @@ $ git push origin --tags
 
 And this will try to deploy the latest changes in the development environment in AWS ECS
 
-## Stay in touch
-
-- Author - [TradeEC](https://trade.ec/contacto.html)
-- Website - [https://trade.ec](https://trade.ec)
-
 ## Upcoming features
 
 <ul>
