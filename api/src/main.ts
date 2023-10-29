@@ -27,8 +27,8 @@ async function bootstrap() {
 
   // Documentation
   const config = new DocumentBuilder()
-    .setTitle('TradeEC API')
-    .setDescription('Boilerplate NestJS MySQL')
+    .setTitle('Credit Card API')
+    .setDescription('Credit Card Manager API')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);

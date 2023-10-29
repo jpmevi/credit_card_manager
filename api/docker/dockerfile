@@ -4,7 +4,7 @@ ARG is_dev=true
 FROM node:12.19.1-slim
 
 #Mainterner
-LABEL MAINTAINER = "Trade EC"
+LABEL MAINTAINER = "CUNOC"
 
 
 # install dependencies
