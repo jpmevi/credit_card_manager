@@ -20,6 +20,17 @@ export class AccountController {
     }
 
     /**
+     * This endpoint returns a paginated list of accounts by username.
+     * @param pagination 
+     * @param username 
+     * @returns 
+     */
+    @Get('/:username')
+    getAccountListByUsername(@Query() pagination: PaginationDto, @Param('username') username: string): Promise<Account[]> {
+        return this.accountService.getAccountsByUsername(pagination, username);
+    }
+
+    /**
      * This endpoint enables a credit card.
      * @param number, number of credit card
      */
