@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Patch, Post, Put, Query } from '@nestjs/common';
 import { PaginationDto } from 'src/app/dtos/pagination.dto';
 import { Account } from 'src/app/entities/Account.entity';
 import { AccountService } from 'src/app/services/account/account.service';
@@ -18,5 +18,26 @@ export class AccountController {
     getAccountList(@Query() pagination: PaginationDto): Promise<Account[]> {
         return this.accountService.getAccounts(pagination);
     }
+
+    /**
+     * This endpoint enables a credit card.
+     * @param number, number of credit card
+     */
+    @Patch('/enable/:number')
+    enableCreditCard(@Param('number') number: string){
+        this.accountService.changeCreditCardStatus(number, 'enabled');
+    }
+
+    /**
+     * This endpoint disables a credit card.
+     * @param number, number of credit card
+     */
+    @Patch('/disable/:number')
+    disableCreditCard(@Param('number') number: string){
+        this.accountService.changeCreditCardStatus(number, 'disabled');
+    }
+
+
+
 
 }

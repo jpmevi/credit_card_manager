@@ -19,4 +19,15 @@ export class AccountService {
         return await this.accountRepository.find({ relations: ['user'], skip: offset, take: limit });
     }
 
+    /**
+     * This method modifies the status of an account to enabled or disabled.
+     * @param number, number of the account
+     */
+    async changeCreditCardStatus(number: string, status: string) {
+        const account = await this.accountRepository.findOne({ number: number });
+        account.status = status;
+        account.rejections = 0;
+        await this.accountRepository.save(account);
+    }
+
 }
