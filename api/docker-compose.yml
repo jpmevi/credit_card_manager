@@ -1,0 +1,60 @@
+version: '3.3'
+
+services:
+  mysql:
+    image: mysql:5
+    environment:
+      MYSQL_DATABASE: credit_card_manager
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    networks:
+      - my_network
+
+  mysqlclient:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - PMA_HOST=mysql
+    ports:
+      - '8080:80'
+    depends_on: 
+      - mysql
+    networks:
+      - my_network
+
+      
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3016:3016'
+    depends_on:
+      - mysql
+    environment:
+      PORT: 3016
+      TYPEORM_CONNECTION: mysql
+      TYPEORM_HOST: mysql
+      TYPEORM_PORT: 3306
+      TYPEORM_DATABASE: credit_card_manager
+      TYPEORM_USERNAME: admin
+      TYPEORM_PASSWORD: admin
+      TYPEORM_SYNCHRONIZE: 'true'
+      TYPEORM_LOGGING: 'true'
+      TYPEORM_ENTITIES: src/**/*.entity.ts
+      TYPEORM_MIGRATIONS: src/database/migrations/*.ts
+      TYPEORM_MIGRATIONS_DIR: src/database/migrations
+      TYPEORM_MIGRATIONS_TABLE_NAME: migrations
+    networks:
+      - my_network
+
+networks:
+  my_network:
+
+volumes:
+  db-data:

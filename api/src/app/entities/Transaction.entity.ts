@@ -35,18 +35,6 @@ export class Transaction {
   })
   createdAt: Date;
 
-  @Column({ type: 'date' })
-  doe: Date;
-
-  @Column({ type: 'text' })
-  log: string;
-
-
-
-  @Column({ type: 'date' })
-  date: Date;
-
-
   @ManyToOne(() => Account, (account) => account.accountLogs, { nullable: false })
   @JoinColumn({ name: "account_number", referencedColumnName: "number" })
   account: Account;
