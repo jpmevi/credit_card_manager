@@ -7,6 +7,7 @@ import {
   ManyToOne,
   BeforeInsert,
   OneToMany,
+  Unique,
 } from 'typeorm';
 import { AccountType } from './AccountType.entity';
 import { User } from './User.entity';
@@ -41,7 +42,7 @@ export class Account {
   @JoinColumn({ name: "username", referencedColumnName: "username" })
   user: User;
 
-  @OneToOne(() => AccountType, { nullable: false })
+  @ManyToOne(type => AccountType, accountType => accountType.id)
   @JoinColumn({ name: "id_account_type" })
   accountType: AccountType;
 

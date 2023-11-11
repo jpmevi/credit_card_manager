@@ -19,6 +19,8 @@ import { Currency } from './app/entities/Currency.entity';
 import { Review } from './app/entities/Review.entity';
 import { Transaction } from './app/entities/Transaction.entity';
 import { User } from './app/entities/User.entity';
+import { AccountController } from './app/controllers/account/account.controller';
+import { AccountService } from './app/services/account/account.service';
 
 @Module({
   imports: [
@@ -36,7 +38,7 @@ import { User } from './app/entities/User.entity';
     TypeOrmModule.forFeature([Account, AccountLog, AccountType, Currency, Review, Transaction, User, ExampleRepository]),
     HttpModule,
   ],
-  controllers: [HealthController],
+  controllers: [HealthController, AccountController],
   providers: [
     ExampleProvider,
     HealthService,
@@ -44,6 +46,7 @@ import { User } from './app/entities/User.entity';
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
     },
+    AccountService,
   ],
   exports: [TypeOrmModule],
 })
