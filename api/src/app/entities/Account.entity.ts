@@ -42,7 +42,7 @@ export class Account {
   @JoinColumn({ name: "username", referencedColumnName: "username" })
   user: User;
 
-  @ManyToOne(type => AccountType, accountType => accountType.id)
+  @ManyToOne(type => AccountType, accountType => accountType.id, { nullable: false })
   @JoinColumn({ name: "id_account_type" })
   accountType: AccountType;
 

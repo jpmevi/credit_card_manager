@@ -20,6 +20,15 @@ export class AccountService {
     }
 
     /**
+     * This method returns a paginated list of accounts by username.
+     * @param username 
+     * @returns 
+     */
+    async getAccountsByUsername({ limit, offset}: PaginationDto, username: string): Promise<Account[]> {
+        return await this.accountRepository.find({ relations: ['user'], skip: offset, take: limit, where: { user: { username: username } } });
+    }
+
+    /**
      * This method modifies the status of an account to enabled or disabled.
      * @param number, number of the account
      */
