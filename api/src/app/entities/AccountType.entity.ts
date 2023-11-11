@@ -4,8 +4,10 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { Currency } from './Currency.entity';
+import { Account } from './Account.entity';
 
 @Entity({ name: 'account_type' })
 export class AccountType {
@@ -24,4 +26,7 @@ export class AccountType {
   @OneToOne(() => Currency, { nullable: false })
   @JoinColumn({ name: "id_currency" })
   currency: Currency;
+
+  @OneToMany(type => Account, account => account.accountType)
+  account: Account;
 }
