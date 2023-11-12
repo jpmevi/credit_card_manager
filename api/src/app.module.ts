@@ -23,6 +23,8 @@ import { AccountController } from './app/controllers/account/account.controller'
 import { AccountService } from './app/services/account/account.service';
 import { CreditCardController } from './app/controllers/credit-card/credit-card.controller';
 import { CreditCardService } from './app/services/credit-card/credit-card.service';
+import { AccountLogController } from './app/controllers/account-log/account-log.controller';
+import { AccountLogService } from './app/services/account-log/account-log.service';
 
 @Module({
   imports: [
@@ -40,7 +42,7 @@ import { CreditCardService } from './app/services/credit-card/credit-card.servic
     TypeOrmModule.forFeature([Account, AccountLog, AccountType, Currency, Review, Transaction, User, ExampleRepository]),
     HttpModule,
   ],
-  controllers: [HealthController, AccountController, CreditCardController],
+  controllers: [HealthController, AccountController, CreditCardController, AccountLogController],
   providers: [
     ExampleProvider,
     HealthService,
@@ -50,6 +52,7 @@ import { CreditCardService } from './app/services/credit-card/credit-card.servic
     },
     AccountService,
     CreditCardService,
+    AccountLogService
   ],
   exports: [TypeOrmModule],
 })
