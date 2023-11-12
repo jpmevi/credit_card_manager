@@ -29,13 +29,13 @@ export class Account {
   @Column({ type: 'enum', enum: ['enabled', 'disabled', 'deleted'], default: "enabled" })
   status: string;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
   balance: number;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  @Column({ type: 'decimal', precision: 10, scale: 2, default: 3000 })
   limit: number;
 
-  @Column({ type: 'int', unsigned: true })
+  @Column({ type: 'int', unsigned: true, default: 0 })
   rejections: number;
 
   @ManyToOne(() => User, (user) => user.accounts, { nullable: false })

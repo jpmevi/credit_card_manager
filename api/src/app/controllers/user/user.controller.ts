@@ -1,9 +1,10 @@
 import { Controller, Delete, Get, Param, Patch, Post, Put, Query, Res } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { PaginationDto } from 'src/app/dtos/pagination.dto';
 import { User } from 'src/app/entities/User.entity';
 import { UserService } from 'src/app/services/user/user.service';
-
+@ApiTags('User')
 @Controller('user')
 export class UserController {
     constructor(private userService: UserService) { }
