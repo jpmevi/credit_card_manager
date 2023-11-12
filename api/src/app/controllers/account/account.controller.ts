@@ -30,25 +30,4 @@ export class AccountController {
         return this.accountService.getAccountsByUsername(pagination, username);
     }
 
-    /**
-     * This endpoint enables a credit card.
-     * @param number, number of credit card
-     */
-    @Patch('/enable/:number')
-    enableCreditCard(@Param('number') number: string){
-        this.accountService.changeCreditCardStatus(number, 'enabled');
-    }
-
-    /**
-     * This endpoint disables a credit card.
-     * @param number, number of credit card
-     */
-    @Patch('/disable/:number')
-    disableCreditCard(@Param('number') number: string){
-        this.accountService.changeCreditCardStatus(number, 'disabled');
-    }
-
-
-
-
 }

@@ -21,6 +21,8 @@ import { Transaction } from './app/entities/Transaction.entity';
 import { User } from './app/entities/User.entity';
 import { AccountController } from './app/controllers/account/account.controller';
 import { AccountService } from './app/services/account/account.service';
+import { CreditCardController } from './app/controllers/credit-card/credit-card.controller';
+import { CreditCardService } from './app/services/credit-card/credit-card.service';
 
 @Module({
   imports: [
@@ -38,7 +40,7 @@ import { AccountService } from './app/services/account/account.service';
     TypeOrmModule.forFeature([Account, AccountLog, AccountType, Currency, Review, Transaction, User, ExampleRepository]),
     HttpModule,
   ],
-  controllers: [HealthController, AccountController],
+  controllers: [HealthController, AccountController, CreditCardController],
   providers: [
     ExampleProvider,
     HealthService,
@@ -47,6 +49,7 @@ import { AccountService } from './app/services/account/account.service';
       useClass: ThrottlerGuard,
     },
     AccountService,
+    CreditCardService,
   ],
   exports: [TypeOrmModule],
 })
