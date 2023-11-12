@@ -11,4 +11,7 @@ export class PaginationDto {
     @IsOptional()
     offset: number = 0;
 
+    @IsOptional()
+    pattern: string = '';
+
 }

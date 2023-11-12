@@ -11,7 +11,7 @@ export class CreditCardController {
      * @param number, number of credit card
      */
     @Patch('/enable/:number')
-    async enableCreditCard(@Param('number') number: string) {
+    async enableCreditCard(@Param('number') number: string) : Promise<void>{
         return this.creditCardService.changeCreditCardStatus(number, 'enable');
     }
 
@@ -20,7 +20,7 @@ export class CreditCardController {
      * @param number, number of credit card
      */
      @Patch('/disable/:number')
-     async disableCreditCard(@Param('number') number: string) {
+     async disableCreditCard(@Param('number') number: string) : Promise<void>{
         return this.creditCardService.changeCreditCardStatus(number, 'disable');
      }
  

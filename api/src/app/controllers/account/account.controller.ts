@@ -15,7 +15,7 @@ export class AccountController {
      * @returns  
      */
     @Get()
-    getAccountList(@Query() pagination: PaginationDto): Promise<Account[]> {
+    async getAccountList(@Query() pagination: PaginationDto): Promise<Account[]> {
         return this.accountService.getAccounts(pagination);
     }
 
@@ -26,7 +26,7 @@ export class AccountController {
      * @returns 
      */
     @Get('/:username')
-    getAccountListByUsername(@Query() pagination: PaginationDto, @Param('username') username: string): Promise<Account[]> {
+    async getAccountListByUsername(@Query() pagination: PaginationDto, @Param('username') username: string): Promise<Account[]> {
         return this.accountService.getAccountsByUsername(pagination, username);
     }
 
