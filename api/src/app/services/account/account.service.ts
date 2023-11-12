@@ -2,7 +2,7 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationDto } from 'src/app/dtos/pagination.dto';
 import { Account } from 'src/app/entities/Account.entity';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 
 @Injectable()
 export class AccountService {
@@ -15,8 +15,12 @@ export class AccountService {
      * @param offset, number of page
      * @returns 
      */
-    async getAccounts({ limit, offset}: PaginationDto): Promise<Account[]> {
-        return await this.accountRepository.find({ relations: ['user'], skip: offset, take: limit });
+    async getAccounts({ limit, offset, pattern}: PaginationDto): Promise<Account[]> {
+        if ( pattern === '' ){
+            return await this.accountRepository.find({ relations: ['user'], skip: offset, take: limit });
+        } else {
+            return await this.accountRepository.find({ relations: ['user'], skip: offset, take: limit,  where: { user: { username: Like(`${pattern}%`) }} });
+        }
     }
 
     /**
