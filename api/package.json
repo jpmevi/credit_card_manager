@@ -24,7 +24,8 @@
     "migrations:run": "npm run typeorm -- migration:run",
     "migrations:show": "npm run typeorm -- migration:show",
     "migrations:revert": "npm run typeorm -- migration:revert",
-    "migrations:drop": "npm run typeorm -- schema:drop"
+    "migrations:drop": "npm run typeorm -- schema:drop",
+    "seed": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed"
   },
   "lint-staged": {
     "**/*.+(ts|tsx)": [
@@ -49,14 +50,17 @@
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
+    "faker": "^5.5.3",
     "joi": "^17.4.0",
     "mysql2": "^2.2.5",
+    "nodemailer": "^6.9.7",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6",
     "sqs-consumer": "^5.5.0",
     "swagger-ui-express": "^4.1.6",
-    "typeorm": "^0.2.34"
+    "typeorm": "^0.2.34",
+    "typeorm-seeding": "^1.6.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.6.0",

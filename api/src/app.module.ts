@@ -23,6 +23,9 @@ import { AccountController } from './app/controllers/account/account.controller'
 import { AccountService } from './app/services/account/account.service';
 import { CreditCardController } from './app/controllers/credit-card/credit-card.controller';
 import { CreditCardService } from './app/services/credit-card/credit-card.service';
+import { EmailService } from './app/services/email/email.service';
+import { UserService } from './app/services/user/user.service';
+import { UserController } from './app/controllers/user/user.controller';
 
 @Module({
   imports: [
@@ -40,9 +43,11 @@ import { CreditCardService } from './app/services/credit-card/credit-card.servic
     TypeOrmModule.forFeature([Account, AccountLog, AccountType, Currency, Review, Transaction, User, ExampleRepository]),
     HttpModule,
   ],
-  controllers: [HealthController, AccountController, CreditCardController],
+  controllers: [HealthController, AccountController, CreditCardController, UserController],
   providers: [
+    UserService,
     ExampleProvider,
+    EmailService,
     HealthService,
     {
       provide: APP_GUARD,
@@ -51,6 +56,6 @@ import { CreditCardService } from './app/services/credit-card/credit-card.servic
     AccountService,
     CreditCardService,
   ],
-  exports: [TypeOrmModule],
+  exports: [TypeOrmModule, EmailService],
 })
 export class AppModule { }
