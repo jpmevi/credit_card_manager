@@ -34,7 +34,7 @@ export class User {
   @Column({ type: 'varchar', length: 45 })
   pin: string;
 
-  @Column({ type: 'enum', enum: ["administrator", "costumer"], default: "costumer" })
+  @Column({ type: 'enum', enum: ["administrator", "customer"], default: "customer" })
   role: string;
 
   @Column({ name: "notify_me", type: 'bool', default: true })

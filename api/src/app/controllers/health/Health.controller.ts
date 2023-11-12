@@ -3,7 +3,7 @@ import { HealthService } from '../../services/health/health.service';
 
 @Controller('health')
 export class HealthController {
-  constructor(private readonly healthService: HealthService) {}
+  constructor(private readonly healthService: HealthService) { }
 
   @Get()
   getHealth() {
