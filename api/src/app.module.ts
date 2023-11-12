@@ -22,7 +22,10 @@ import { User } from './app/entities/User.entity';
 import { AccountController } from './app/controllers/account/account.controller';
 import { AccountService } from './app/services/account/account.service';
 import { CreditCardController } from './app/controllers/credit-card/credit-card.controller';
-import { CreditCardService } from './app/services/credit-card/credit-card.service';
+import { CreditCardService } from './app/services/credit-card/credit-card.service'
+import { EmailService } from './app/services/email/email.service';
+import { UserService } from './app/services/user/user.service';
+import { UserController } from './app/controllers/user/user.controller';
 import { AccountLogController } from './app/controllers/account-log/account-log.controller';
 import { AccountLogService } from './app/services/account-log/account-log.service';
 import { ReportController } from './app/controllers/report/report.controller';
@@ -46,7 +49,9 @@ import { ReportService } from './app/services/report/report.service';
   ],
   controllers: [HealthController, AccountController, CreditCardController, AccountLogController, ReportController],
   providers: [
+    UserService,
     ExampleProvider,
+    EmailService,
     HealthService,
     {
       provide: APP_GUARD,
@@ -57,6 +62,6 @@ import { ReportService } from './app/services/report/report.service';
     AccountLogService,
     ReportService
   ],
-  exports: [TypeOrmModule],
+  exports: [TypeOrmModule, EmailService],
 })
 export class AppModule { }
