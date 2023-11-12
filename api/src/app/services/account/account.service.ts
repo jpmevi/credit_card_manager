@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationDto } from 'src/app/dtos/pagination.dto';
 import { Account } from 'src/app/entities/Account.entity';
@@ -30,6 +30,18 @@ export class AccountService {
      */
     async getAccountsByUsername({ limit, offset}: PaginationDto, username: string): Promise<Account[]> {
         return await this.accountRepository.find({ relations: ['user'], skip: offset, take: limit, where: { user: { username: username } } });
+    }
+
+    /**
+     * This method modifies the status of an account.
+     * @param number, number of the account
+     */
+    async changeAccountStatus(number: string, status: string) {
+        const account = await this.accountRepository.findOne({ number: number });
+        if(account == null) throw new NotFoundException('Account not found');
+        account.status = status;
+        account.rejections = 0;
+        await this.accountRepository.save(account);
     }
 
 }
