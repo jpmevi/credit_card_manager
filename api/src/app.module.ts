@@ -28,6 +28,8 @@ import { UserService } from './app/services/user/user.service';
 import { UserController } from './app/controllers/user/user.controller';
 import { AccountLogController } from './app/controllers/account-log/account-log.controller';
 import { AccountLogService } from './app/services/account-log/account-log.service';
+import { ReportController } from './app/controllers/report/report.controller';
+import { ReportService } from './app/services/report/report.service';
 
 @Module({
   imports: [
@@ -45,7 +47,7 @@ import { AccountLogService } from './app/services/account-log/account-log.servic
     TypeOrmModule.forFeature([Account, AccountLog, AccountType, Currency, Review, Transaction, User, ExampleRepository]),
     HttpModule,
   ],
-  controllers: [HealthController, AccountController, CreditCardController, AccountLogController,UserController],
+  controllers: [HealthController, AccountController, CreditCardController, AccountLogController, ReportController],
   providers: [
     UserService,
     ExampleProvider,
@@ -57,7 +59,8 @@ import { AccountLogService } from './app/services/account-log/account-log.servic
     },
     AccountService,
     CreditCardService,
-    AccountLogService
+    AccountLogService,
+    ReportService
   ],
   exports: [TypeOrmModule, EmailService],
 })
