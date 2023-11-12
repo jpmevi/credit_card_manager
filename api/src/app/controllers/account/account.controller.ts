@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Patch, Post, Put, Query } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Patch, Post, Put, Query } from '@nestjs/common';
 import { PaginationDto } from 'src/app/dtos/pagination.dto';
 import { Account } from 'src/app/entities/Account.entity';
 import { AccountService } from 'src/app/services/account/account.service';
@@ -28,6 +28,15 @@ export class AccountController {
     @Get('/:username')
     async getAccountListByUsername(@Query() pagination: PaginationDto, @Param('username') username: string): Promise<Account[]> {
         return this.accountService.getAccountsByUsername(pagination, username);
+    }
+
+     /**
+     * This endpoint deletes an account.
+     * @param number, number of credit card
+     */
+     @Delete('/:number')
+     async deleteAccount(@Param('number') number: string) : Promise<void>{
+        return this.accountService.changeAccountStatus(number, 'deleted');
     }
 
 }

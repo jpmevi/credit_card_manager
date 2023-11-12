@@ -22,6 +22,6 @@ export class CreditCardController {
      @Patch('/disable/:number')
      async disableCreditCard(@Param('number') number: string) : Promise<void>{
         return this.creditCardService.changeCreditCardStatus(number, 'disable');
-     }
+    }
  
 }
