@@ -1,7 +1,9 @@
 import { Controller, Param, Patch, Query } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { AccountLogService } from 'src/app/services/account-log/account-log.service';
 import { CreditCardService } from 'src/app/services/credit-card/credit-card.service';
 
+@ApiTags('Credit Card')
 @Controller('credit-card')
 export class CreditCardController {
 
