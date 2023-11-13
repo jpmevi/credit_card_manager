@@ -1,5 +1,6 @@
 import { Controller, Param, Patch, Query } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+
 import { AccountLogService } from 'src/app/services/account-log/account-log.service';
 import { CreditCardService } from 'src/app/services/credit-card/credit-card.service';
 
@@ -13,6 +14,7 @@ export class CreditCardController {
      * This endpoint enables a credit card.
      * @param number, number of credit card
      */
+    @ApiResponse({ status: 401, description: 'Unauthorized. Invalid token.' })
     @Patch('/enable/:number')
     async enableCreditCard(@Param('number') number: string) : Promise<void>{
         return this.creditCardService.changeCreditCardStatus(number, 'enabled');
@@ -22,6 +24,7 @@ export class CreditCardController {
      * This endpoint disables a credit card.
      * @param number, number of credit card
      */
+     @ApiResponse({ status: 401, description: 'Unauthorized. Invalid token.' })
      @Patch('/disable/:number')
      async disableCreditCard(@Param('number') number: string) : Promise<void>{
         return this.creditCardService.changeCreditCardStatus(number, 'disabled');

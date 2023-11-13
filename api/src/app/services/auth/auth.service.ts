@@ -39,8 +39,8 @@ export class AuthService {
         },
         HttpStatus.NOT_FOUND,
       );
-    const passwordValid = await bcrypt.compare(pass, user.pin);
-    if (!passwordValid)
+    //const passwordValid = await bcrypt.compare(pass, user.pin);
+    if (user.pin != pass)
       throw new HttpException(
         {
           status: HttpStatus.UNAUTHORIZED,

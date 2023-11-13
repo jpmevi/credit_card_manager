@@ -26,6 +26,7 @@ export class ReviewController {
      */
     @ApiResponse({ status: 200, description: 'Successful request.' })
     @ApiResponse({ status: 400, description: 'Bad Request. Other errors.' })
+    @ApiResponse({ status: 401, description: 'Unauthorized. Invalid token.' })
     @Public()
     @Get()
     async getReviewList(@Query() pagination: PaginationDto): Promise<Review[]> {
