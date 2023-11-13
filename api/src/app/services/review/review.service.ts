@@ -25,7 +25,7 @@ export class ReviewService {
   ) {}
 
   /**
-   * This method returns a paginated list of no deleted accounts.
+   * This method returns a paginated list of reviews.
    * @param limit, number of elements
    * @param offset, number of page
    * @param pattern, pattern to search
@@ -45,11 +45,9 @@ export class ReviewService {
       take: limit,
     });
 
-
     // Retorna
     return reviewsTransformer.transformReviewsAndUsers(reviews);
-
-}
+  }
 
   /**
    * This method returns a paginated list of reviews by username.
@@ -62,19 +60,19 @@ export class ReviewService {
     { limit, offset }: PaginationDto,
     username: string,
   ): Promise<Review[]> {
-     // Verificar si el usuario existe antes de ejecutar la consulta
-  const user = await this.userRepository.findOne({ username })
+    // Verificar si el usuario existe antes de ejecutar la consulta
+    const user = await this.userRepository.findOne({ username });
 
- if (!user) {
-        throw new HttpException(
-          {
-            status: HttpStatus.NOT_FOUND,
-            message: `User with username ${username} does not exist.`,
-          },
-          HttpStatus.NOT_FOUND,
-        );
-      }
-     const reviews = await this.reviewRepository.find({
+    if (!user) {
+      throw new HttpException(
+        {
+          status: HttpStatus.NOT_FOUND,
+          message: `User with username ${username} does not exist.`,
+        },
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    const reviews = await this.reviewRepository.find({
       skip: offset,
       take: limit,
       order: {
@@ -110,11 +108,6 @@ export class ReviewService {
       createReviewDto.user = user;
       const review = this.reviewRepository.create(createReviewDto);
       await this.reviewRepository.save(review);
-
-      //   return this.userRepository.find({
-      //     where: { username: user.username },
-      //     relations: ['reviews'],
-      //   });
       return reviewsTransformer.transformReviewAndUser(review);
     } catch (error) {
       if (error instanceof HttpException) {
@@ -145,6 +138,43 @@ export class ReviewService {
         code: HttpStatus.OK,
         status: 'success',
         message: 'Review deleted successfully.',
+      };
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      } else {
+        throw new BadRequestException(error);
+      }
+    }
+  }
+
+  /**
+   * This method updates a review by ID.
+   * @param id, id of the review
+   */
+  async updateReview(id: number, UpdateReviewDto: UpdateReviewDto) {
+    try {
+      const review = await this.reviewRepository.findOne({
+        where: { id: id },
+        relations: ['user'],
+      });
+
+      if (review == null)
+        throw new HttpException(
+          {
+            status: HttpStatus.NOT_FOUND,
+            message: `No Review found for Id: ${id}`,
+          },
+          HttpStatus.NOT_FOUND,
+        );
+
+      this.reviewRepository.merge(review, UpdateReviewDto);
+      await this.reviewRepository.save(review);
+
+      return {
+        code: HttpStatus.OK,
+        status: 'success',
+        message: 'Review updated successfully.',
       };
     } catch (error) {
       if (error instanceof HttpException) {

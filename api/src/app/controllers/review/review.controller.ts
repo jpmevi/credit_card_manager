@@ -64,29 +64,26 @@ export class ReviewController {
         return this.reviewService.createReview(CreateReviewDto);
     }
 
-    // /**
-    // * This endpoint updates an account and user by account number
-    // */
-    // @ApiResponse({ status: 200, description: 'Successful update of the account and user.' })
-    // @ApiResponse({ status: 404, description: 'Not Found. The account was not found for the provided number.' })
-    // @ApiResponse({ status: 409, description: 'Conflict. The email is already registered with another user.' })
-    // @ApiResponse({ status: 409, description: 'Conflict. The username is already in use.' })
-    // @ApiResponse({ status: 409, description: 'Conflict. Invalid or not found account type.' })
-    // @ApiResponse({ status: 400, description: 'Bad Request. Generic error in the request.' })
-    // @Patch('/:number')
-    // async updateAccount(@Param('number') number: string, @Body() updateUserandAccountDto: UpdateUserAndAccountDto) {
-    //     return this.accountService.updateAccount(number, updateUserandAccountDto);
-    // }
+    /**
+    * This endpoint updates a review by review id
+    */
+    @ApiResponse({ status: 200, description: 'Successful update of the Review.' })
+    @ApiResponse({ status: 404, description: 'Not Found. The Review was not found for the provided Id.' })
+    @ApiResponse({ status: 400, description: 'Bad Request. Generic error in the request.' })
+    @Patch('/:id')
+    async updateReview(@Param('id') id: number, @Body() UpdateReviewDto: UpdateReviewDto) {
+        return this.reviewService.updateReview(id, UpdateReviewDto);
+    }
 
 
-    // /**
-    //  * This endpoint deletes an account by number
-    //  */
-    // @ApiResponse({ status: 200, description: 'Account deleted successfully.', })
-    // @ApiResponse({ status: 404, description: 'No account found for the given number.', })
-    // @Delete('/:number')
-    // async deleteAccount(@Param('number') number: string) {
-    //     return this.accountService.deleteAccount(number);
-    // }
+    /**
+     * This endpoint deletes an account by number
+     */
+    @ApiResponse({ status: 200, description: 'Review deleted successfully.', })
+    @ApiResponse({ status: 404, description: 'No Review found for the given id.', })
+    @Delete('/:id')
+    async deleteReview(@Param('id') id: number) {
+        return this.reviewService.deleteReview(id);
+    }
 
 }

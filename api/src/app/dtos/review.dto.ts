@@ -33,10 +33,12 @@ export class CreateReviewDto {
   @ApiProperty()
   user: User;
 
+  @IsDate()
   @IsOptional()
   @ApiProperty()
   readonly created_at: Date;
 
+  @IsDate()
   @IsOptional()
   @ApiProperty()
   readonly updated_at: Date;
@@ -44,17 +46,21 @@ export class CreateReviewDto {
 
 export class UpdateReviewDto {
   @IsString()
+  @IsOptional()
   @ApiProperty()
   readonly comment: string;
 
   @IsInt()
+  @IsOptional()
   @ApiProperty()
   readonly rate: number;
 
+  @IsDate()
   @IsOptional()
   @ApiProperty()
   readonly created_at: Date;
 
+  @IsDate()
   @IsOptional()
   @ApiProperty()
   readonly updated_at: Date;
