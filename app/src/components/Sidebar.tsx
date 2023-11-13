@@ -45,7 +45,7 @@ export default function ResponsiveDrawer(props: Props) {
           { text: "Tipo de Cambio", icon: <CurrencyExchangeIcon /> },
           { text: "Reportes", icon: <AssessmentIcon /> },
           // Agrega más elementos según sea necesario
-        ].map((item, index) => (
+        ].map((item) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton>
               <ListItemIcon color="white">{item.icon}</ListItemIcon>

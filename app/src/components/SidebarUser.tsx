@@ -42,7 +42,7 @@ export default function ResponsiveDrawerUser(props: Props) {
           { text: "Home", icon: <HomeIcon />, to: "/dashboard-user" },
           { text: "Comentarios", icon: <AssessmentIcon />, to: "/comments" },
           // Agrega más elementos según sea necesario
-        ].map((item, index) => (
+        ].map((item) => (
           <ListItem key={item.text} disablePadding>
            <ListItemButton component={Link} to={item.to}>
               <ListItemIcon color="white">{item.icon}</ListItemIcon>

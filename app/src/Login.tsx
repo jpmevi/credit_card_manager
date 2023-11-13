@@ -32,7 +32,6 @@ function Copyright(props: any) {
 
 export default function SignIn() {
   const navigate = useNavigate();
-  const [error, setError] = React.useState<string>("");
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -63,11 +62,11 @@ export default function SignIn() {
         // La solicitud fue exitosa, puedes redirigir a la página deseada
       } else {
         // La solicitud no fue exitosa, maneja el error o muestra un mensaje
-        setError("Credenciales incorrectas");
+       
       }
     } catch (error) {
       console.error("Error al procesar la solicitud:", error);
-      setError("Error en la solicitud");
+     
     }
   };
 

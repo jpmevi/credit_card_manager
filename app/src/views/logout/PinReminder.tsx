@@ -2,17 +2,14 @@ import {
   Avatar,
   Box,
   Button,
-  Checkbox,
   Container,
-  FormControlLabel,
   Grid,
   TextField,
   Typography,
 } from "@mui/material";
 import "../../App.css";
-import MessageIcon from "@mui/icons-material/Message";
 import ResponsiveDrawerLogOut from "../../components/SidebarLogOut";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PinIcon from "@mui/icons-material/Pin";
 import React from "react";
 function PinReminder() {

@@ -37,7 +37,7 @@ export default function ResponsiveDrawerLogOut(props: Props) {
         {[
           { text: "Iniciar Sesion", icon: <LoginIcon />, to: "/login" },
           { text: "Recuperar Pin", icon: <PinIcon />, to: "/pin-reminder" },
-        ].map((item, index) => (
+        ].map((item) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton component={Link} to={item.to}>
               <ListItemIcon color="white">{item.icon}</ListItemIcon>

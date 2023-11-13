@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Typography } from "@mui/material";
 import ResponsiveDrawerLogOut from "./components/SidebarLogOut";
 import MessageIcon from "@mui/icons-material/Message";
