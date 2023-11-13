@@ -22,12 +22,14 @@ import { User } from './app/entities/User.entity';
 import { AccountController } from './app/controllers/account/account.controller';
 import { AccountService } from './app/services/account/account.service';
 import { CreditCardController } from './app/controllers/credit-card/credit-card.controller';
-import { CreditCardService } from './app/services/credit-card/credit-card.service'
+import { CreditCardService } from './app/services/credit-card/credit-card.service';
 import { EmailService } from './app/services/email/email.service';
 import { UserService } from './app/services/user/user.service';
 import { UserController } from './app/controllers/user/user.controller';
 import { AccountLogController } from './app/controllers/account-log/account-log.controller';
 import { AccountLogService } from './app/services/account-log/account-log.service';
+import { ReviewService } from './app/services/review/review.service';
+import { ReviewController } from './app/controllers/review/review.controller';
 import { ReportController } from './app/controllers/report/report.controller';
 import { ReportService } from './app/services/report/report.service';
 
@@ -44,10 +46,26 @@ import { ReportService } from './app/services/report/report.service';
       ttl: 60,
       limit: 20000,
     }),
-    TypeOrmModule.forFeature([Account, AccountLog, AccountType, Currency, Review, Transaction, User, ExampleRepository]),
+    TypeOrmModule.forFeature([
+      Account,
+      AccountLog,
+      AccountType,
+      Currency,
+      Review,
+      Transaction,
+      User,
+      ExampleRepository,
+    ]),
     HttpModule,
   ],
-  controllers: [HealthController, AccountController, CreditCardController, AccountLogController, ReportController],
+  controllers: [
+    HealthController,
+    AccountController,
+    CreditCardController,
+    AccountLogController,
+    ReportController,
+    ReviewController,
+  ],
   providers: [
     UserService,
     ExampleProvider,
@@ -60,8 +78,9 @@ import { ReportService } from './app/services/report/report.service';
     AccountService,
     CreditCardService,
     AccountLogService,
-    ReportService
+    ReportService,
+    ReviewService,
   ],
   exports: [TypeOrmModule, EmailService],
 })
-export class AppModule { }
+export class AppModule {}
