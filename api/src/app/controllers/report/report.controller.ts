@@ -1,8 +1,8 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Account } from 'src/app/entities/Account.entity';
-import { Transaction } from 'src/app/entities/Transaction.entity';
-import { ReportService } from 'src/app/services/report/report.service';
+import { Account } from '../../entities/Account.entity';
+import { Transaction } from '../../entities/Transaction.entity';
+import { ReportService } from '../../services/report/report.service';
 @ApiTags('Report')
 @Controller('report')
 export class ReportController {

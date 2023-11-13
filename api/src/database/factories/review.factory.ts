@@ -1,6 +1,6 @@
 import * as Faker from 'faker';
-import { Review } from 'src/app/entities/Review.entity';
-import { User } from 'src/app/entities/User.entity';
+import { Review } from '../../app/entities/Review.entity';
+import { User } from '../../app/entities/User.entity';
 import { define } from 'typeorm-seeding';
 
 define(Review, (faker: typeof Faker, context: { user: User }) => {

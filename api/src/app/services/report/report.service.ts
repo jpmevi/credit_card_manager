@@ -1,7 +1,7 @@
 import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Account } from 'src/app/entities/Account.entity';
-import { Transaction } from 'src/app/entities/Transaction.entity';
+import { Account } from '../../entities/Account.entity';
+import { Transaction } from '../../entities/Transaction.entity';
 import { Repository, getRepository } from 'typeorm';
 
 @Injectable()

@@ -1,10 +1,10 @@
 import { Body, Controller, Post, HttpCode, HttpStatus , Request} from '@nestjs/common';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { AuthDto } from 'src/app/dtos/auth.dto ';
+import { AuthService } from '../../services/auth/auth.service';
+import { AuthDto } from '../../dtos/auth.dto ';
 import { ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
-import { PaginationDto } from 'src/app/dtos/pagination.dto';
-import { User } from 'src/app/entities/User.entity';
+import { PaginationDto } from '../../dtos/pagination.dto';
+import { User } from '../../entities/User.entity';
 import { SetMetadata } from '@nestjs/common';
 
 export const IS_PUBLIC_KEY = 'isPublic';

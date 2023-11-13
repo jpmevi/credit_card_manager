@@ -6,10 +6,10 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PaginationDto } from 'src/app/dtos/pagination.dto';
-import { User } from 'src/app/entities/User.entity';
+import { PaginationDto } from '../../dtos/pagination.dto';
+import { User } from '../../entities/User.entity';
 import { UserService } from '../user/user.service';
-import { AuthDto } from 'src/app/dtos/auth.dto ';
+import { AuthDto } from '../../dtos/auth.dto ';
 import { Like, Repository } from 'typeorm';
 import { EmailService } from '../email/email.service';
 import { Response } from 'express';

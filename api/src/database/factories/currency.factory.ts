@@ -1,5 +1,5 @@
 import { define, factory } from 'typeorm-seeding';
-import { Currency } from 'src/app/entities/Currency.entity';
+import { Currency } from '../../app/entities/Currency.entity';
 import * as Faker from 'faker';
 
 define(Currency, (faker: typeof Faker, context: { type: string }) => {

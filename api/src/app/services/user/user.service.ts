@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PaginationDto } from 'src/app/dtos/pagination.dto';
-import { User } from 'src/app/entities/User.entity';
+import { PaginationDto } from '../../dtos/pagination.dto';
+import { User } from '../../entities/User.entity';
 import { Like, Repository } from 'typeorm';
 import { EmailService } from '../email/email.service';
 import { Response } from 'express';

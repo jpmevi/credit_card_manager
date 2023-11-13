@@ -6,11 +6,11 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PaginationDto } from 'src/app/dtos/pagination.dto';
-import { Review } from 'src/app/entities/Review.entity';
+import { PaginationDto } from '../../dtos/pagination.dto';
+import { Review } from '../../entities/Review.entity';
 import { Like, Not, Repository } from 'typeorm';
-import { CreateReviewDto, UpdateReviewDto } from 'src/app/dtos/review.dto';
-import { User } from 'src/app/entities/User.entity';
+import { CreateReviewDto, UpdateReviewDto } from '../../dtos/review.dto';
+import { User } from '../../entities/User.entity';
 import { UserService } from '../user/user.service';
 import { Response } from 'express';
 import { reviewsTransformer } from './review.transformer';

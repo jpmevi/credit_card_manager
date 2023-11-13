@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Account } from 'src/app/entities/Account.entity';
+import { Account } from '../../entities/Account.entity';
 import { Repository } from 'typeorm';
 import { AccountLogService } from '../account-log/account-log.service';
 
