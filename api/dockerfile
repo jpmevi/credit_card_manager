@@ -23,7 +23,6 @@ RUN npm install -g typescript
 # TypeScript
 RUN tsc
 
-RUN npm run seed
 # set application PORT and expose docker PORT, 80 is what Elastic Beanstalk expects
 ENV PORT 3016
 EXPOSE 3016
