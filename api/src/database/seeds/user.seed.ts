@@ -5,6 +5,7 @@ import { Account } from 'src/app/entities/Account.entity';
 import { AccountType } from 'src/app/entities/AccountType.entity';
 import { Currency } from 'src/app/entities/Currency.entity';
 import { Transaction } from 'src/app/entities/Transaction.entity';
+import { Review } from 'src/app/entities/Review.entity';
 
 export default class CreateUsers implements Seeder {
     public async run(factory: Factory, connection: Connection): Promise<void> {
@@ -25,6 +26,7 @@ export default class CreateUsers implements Seeder {
             const goldAccount = await factory(Account)({ user, accountType: accountTypes[1] }).create();
             await factory(Transaction)({ account: normalAccount }).createMany(50);
             await factory(Transaction)({ account: goldAccount }).createMany(50);
+            await factory(Review)({ user: user }).createMany(2);
         }
     }
 }

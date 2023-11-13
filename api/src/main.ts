@@ -24,7 +24,8 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
   // Security
-  app.enableCors();
+  app.enableCors({
+  });
 
   // Documentation
   const config = new DocumentBuilder()
