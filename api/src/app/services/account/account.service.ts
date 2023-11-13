@@ -109,9 +109,6 @@ export class AccountService {
                 }, HttpStatus.CONFLICT);
             }
 
-            const saltOrRounds = 1;
-            const hashedPassword = await bcrypt.hash(createUserAndAccountDto.pin, saltOrRounds);
-            createUserAndAccountDto.pin = hashedPassword;
             const user = this.userRepository.create(createUserAndAccountDto);
             await this.userRepository.save(user);
 
