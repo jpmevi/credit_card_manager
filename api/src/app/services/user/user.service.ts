@@ -35,8 +35,6 @@ export class UserService {
                 error: `User Database Error: ${error.message}`,
             }, HttpStatus.FORBIDDEN);
         }
-
-
     }
 
 }

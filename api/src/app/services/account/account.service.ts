@@ -8,6 +8,7 @@ import { CreateUserAndAccountDto, UpdateUserAndAccountDto } from 'src/app/dtos/a
 import { AccountType } from 'src/app/entities/AccountType.entity';
 import { User } from 'src/app/entities/User.entity';
 import { Response } from 'express';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AccountService {
@@ -108,6 +109,9 @@ export class AccountService {
                 }, HttpStatus.CONFLICT);
             }
 
+            const saltOrRounds = 1;
+            const hashedPassword = await bcrypt.hash(createUserAndAccountDto.pin, saltOrRounds);
+            createUserAndAccountDto.pin = hashedPassword;
             const user = this.userRepository.create(createUserAndAccountDto);
             await this.userRepository.save(user);
 
@@ -205,6 +209,7 @@ export class AccountService {
                 }
                 account.accountType = accountType;
             }
+            
             this.userRepository.merge(user, updateUserandAccountDto);
             await this.userRepository.save(user);
             this.accountRepository.merge(account, updateUserandAccountDto.account);
