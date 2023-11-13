@@ -4,8 +4,12 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  
 } from 'typeorm';
 import { User } from './User.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity({ name: 'review' })
 export class Review {
@@ -17,6 +21,22 @@ export class Review {
 
   @Column({ type: 'int', unsigned: true })
   rate: number;
+
+  @Exclude()
+  @CreateDateColumn({
+    name: 'created_at',
+    type: 'timestamp',
+    nullable: false,
+  })
+  createdAt: Date;
+
+  @Exclude()
+  @UpdateDateColumn({
+    name: 'updated_at',
+    type: 'timestamp',
+    nullable: false,
+  })
+  updatedAt: Date;
 
   @ManyToOne(() => User, (user) => user.reviews, { nullable: false })
   @JoinColumn({ name: "username", referencedColumnName: "username" })
