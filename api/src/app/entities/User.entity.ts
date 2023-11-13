@@ -31,7 +31,7 @@ export class User {
   @Column({ type: 'date' })
   dob: Date;
 
-  @Column({ type: 'varchar', length: 45 })
+  @Column({ type: 'text'})
   pin: string;
 
   @Column({ type: 'enum', enum: ["administrator", "customer"], default: "customer" })

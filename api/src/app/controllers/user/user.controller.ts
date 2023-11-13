@@ -4,6 +4,10 @@ import { Response } from 'express';
 import { PaginationDto } from 'src/app/dtos/pagination.dto';
 import { User } from 'src/app/entities/User.entity';
 import { UserService } from 'src/app/services/user/user.service';
+import { SetMetadata } from '@nestjs/common';
+
+export const IS_PUBLIC_KEY = 'isPublic';
+export const Public = () => SetMetadata(IS_PUBLIC_KEY, true);
 @ApiTags('User')
 @Controller('user')
 export class UserController {
@@ -13,8 +17,10 @@ export class UserController {
      * @param email 
      * @returns 
      */
+    @Public()
     @Get('/reminder/:email')
     async pinReminder(@Param('email') email: string, @Res() response: Response): Promise<any> {
         return this.userService.pinReminder(email, response);
     }
+
 }

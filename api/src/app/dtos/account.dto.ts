@@ -46,7 +46,7 @@ export class CreateUserAndAccountDto {
 
   @IsString()
   @ApiProperty()
-  readonly pin: string;
+  pin: string;
 
   @IsEnum(["administrator", "customer"])
   @ApiProperty({ enum: ["administrator", "customer"] })

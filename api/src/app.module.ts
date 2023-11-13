@@ -32,6 +32,10 @@ import { ReviewService } from './app/services/review/review.service';
 import { ReviewController } from './app/controllers/review/review.controller';
 import { ReportController } from './app/controllers/report/report.controller';
 import { ReportService } from './app/services/report/report.service';
+import { JwtModule } from '@nestjs/jwt';
+import { AuthController } from './app/controllers/auth/auth.controller';
+import { AuthService } from './app/services/auth/auth.service';
+import { AuthGuard } from './app/guards/auth.guard';
 
 @Module({
   imports: [
@@ -57,6 +61,10 @@ import { ReportService } from './app/services/report/report.service';
       ExampleRepository,
     ]),
     HttpModule,
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '10m' },
+    }),
   ],
   controllers: [
     HealthController,
@@ -65,6 +73,8 @@ import { ReportService } from './app/services/report/report.service';
     AccountLogController,
     ReportController,
     ReviewController,
+    UserController,
+    AuthController,
   ],
   providers: [
     UserService,
@@ -73,13 +83,14 @@ import { ReportService } from './app/services/report/report.service';
     HealthService,
     {
       provide: APP_GUARD,
-      useClass: ThrottlerGuard,
+      useClass: AuthGuard,
     },
     AccountService,
     CreditCardService,
     AccountLogService,
     ReportService,
     ReviewService,
+    AuthService,
   ],
   exports: [TypeOrmModule, EmailService],
 })
