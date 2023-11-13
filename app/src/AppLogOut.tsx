@@ -44,7 +44,7 @@ function AppLogout() {
       <ResponsiveDrawerLogOut />
       <div className="elementsContainer">
         <Typography variant="h6" noWrap component="div" fontWeight="bold">
-          MIRA LO QUE NUESTROS CLIENTES DICEN DE NOSOTROS
+          MIRA LO QUE NUESTROS CLIENTES DICEN DE NOSOTROSS
         </Typography>
         <div className="comentarioContainer">
           {comments.map((comment, index) => (
