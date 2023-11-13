@@ -50,6 +50,9 @@ services:
       TYPEORM_MIGRATIONS: src/database/migrations/*.ts
       TYPEORM_MIGRATIONS_DIR: src/database/migrations
       TYPEORM_MIGRATIONS_TABLE_NAME: migrations
+      MAIL_USERNAME: 'juanmezavi@gmail.com'
+      MAIL_PASSWORD: 'vjivpqryrohwpfso'
+      JWT_SECRET: pedrodom
     networks:
       - my_network
 
