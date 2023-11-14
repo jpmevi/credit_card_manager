@@ -15,6 +15,7 @@ import Typography from "@mui/material/Typography";
 import LoginIcon from "@mui/icons-material/Login";
 import PinIcon from "@mui/icons-material/Pin";
 import { Link } from "react-router-dom";
+import { BsCreditCard2FrontFill } from "react-icons/bs";
 
 const drawerWidth = 240;
 
@@ -31,8 +32,19 @@ export default function ResponsiveDrawerLogOut(props: Props) {
   };
 
   const drawer = (
-    <div>
+    <div className="sidebar-custom">
+      <div className="titulo-sidebar">
+        <div className="bloque-azul-2"></div>
+        <h1 className="titulo-sidebar">Portal financiero</h1>
+      </div>
+
+      <div className="center-logo">
+        <BsCreditCard2FrontFill size={50} />
+      </div>
+      
+      
       <Toolbar />
+      
       <List>
         {[
           { text: "Iniciar Sesion", icon: <LoginIcon />, to: "/login" },
@@ -73,10 +85,8 @@ export default function ResponsiveDrawerLogOut(props: Props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Portal Financiero
-          </Typography>
         </Toolbar>
+        
       </AppBar>
       <Box
         component="nav"
@@ -108,7 +118,7 @@ export default function ResponsiveDrawerLogOut(props: Props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              bgcolor: "#E1E2F2",
+              bgcolor: "#cdd4fa",
             },
           }}
           open

@@ -36,11 +36,13 @@ export default function ResponsiveDrawerUser(props: Props) {
 
   const drawer = (
     <div>
+      
       <Toolbar />
       <List>
         {[
           { text: "Home", icon: <HomeIcon />, to: "/dashboard-user" },
           { text: "Comentarios", icon: <AssessmentIcon />, to: "/comments" },
+          { text: "Reportes", icon: <AssessmentIcon />, to: "/comments" },
           // Agrega más elementos según sea necesario
         ].map((item) => (
           <ListItem key={item.text} disablePadding>
@@ -59,7 +61,9 @@ export default function ResponsiveDrawerUser(props: Props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
+    
     <Box sx={{ display: "flex" }}>
+      
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -79,9 +83,7 @@ export default function ResponsiveDrawerUser(props: Props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Portal Financiero
-          </Typography>
+         
         </Toolbar>
       </AppBar>
       <Box
@@ -120,6 +122,10 @@ export default function ResponsiveDrawerUser(props: Props) {
           }}
           open
         >
+          <div className="titulo-sidebar">
+              <div className="bloque-azul"></div>
+              <h1 className="titulo-sidebar">Portal financiero</h1>
+          </div>
           <div
             style={{
               display: "flex",

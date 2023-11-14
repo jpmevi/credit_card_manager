@@ -10,6 +10,7 @@ function App() {
   return (
     <div className="appContainer">
       <ResponsiveDrawer />
+      <div className="separator-y"></div>
       <div className="cardContainer">
         <BasicCard
           title="Movimientos"
