@@ -55,6 +55,4 @@ export class AuthService {
       role: user.role,
     };
   }
-
- 
 }

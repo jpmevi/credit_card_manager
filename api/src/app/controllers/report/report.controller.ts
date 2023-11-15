@@ -59,4 +59,29 @@ export class ReportController {
         return this.reportService.getMovementsDetailReport(number);
     }
 
+    /**
+    * This endpoint returns a list of all account deleted in the api.
+    * @returns 
+    */
+    @Get('/deletedAccounts')
+    @ApiResponse({
+        status: 200,
+        description: 'Success. Returns a list of deleted accounts.',
+    })
+    async getReportDeletedAccounts(): Promise<any[]> {
+        return this.reportService.getDeletedAccounts();
+    }
+
+    /**
+    * This endpoint returns a list of all account deleted in the api.
+    * @returns 
+    */
+    @Get('/disabledAccounts')
+    @ApiResponse({
+        status: 200,
+        description: 'Success. Returns a list of deleted accounts.',
+    })
+    async getReportDisabledAccounts(): Promise<any[]> {
+        return this.reportService.getDisabledAccounts();
+    }
 }

@@ -8,6 +8,7 @@ import {
   BeforeInsert,
   OneToMany,
   Unique,
+  DeleteDateColumn,
 } from 'typeorm';
 import { AccountType } from './AccountType.entity';
 import { User } from './User.entity';
@@ -38,6 +39,9 @@ export class Account {
   @Column({ type: 'int', unsigned: true, default: 0 })
   rejections: number;
 
+  @DeleteDateColumn()
+  deleted_at?: Date;
+  
   @ManyToOne(() => User, (user) => user.accounts, { nullable: false })
   @JoinColumn({ name: "username", referencedColumnName: "username" })
   user: User;
@@ -52,8 +56,8 @@ export class Account {
   @OneToMany(() => Transaction, (transaction) => transaction.account)
   transactions: Transaction[]
 
-  @BeforeInsert()
-  async hashPassword() {
-    this.cvv = await bcrypt.hash(this.cvv, 10);
-  }
+  // @BeforeInsert()
+  // async hashPassword() {
+  //   this.cvv = await bcrypt.hash(this.cvv, 10);
+  // }
 }
