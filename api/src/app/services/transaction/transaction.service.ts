@@ -56,6 +56,15 @@ export class TransactionService {
           HttpStatus.NOT_FOUND,
         );
       }
+      if (sourceAccount.status == 'disabled') {
+        throw new HttpException(
+          {
+            status: HttpStatus.NOT_FOUND,
+            message: `Account is disabled`,
+          },
+          HttpStatus.NOT_FOUND,
+        );
+      }
       const destinationAccount = await this.accountRepository
         .findOne({ number: transactionPaymentGatewayDto.destinationAccount })
         .then((account) => account);
@@ -81,6 +90,9 @@ export class TransactionService {
           HttpStatus.NOT_FOUND,
         );
       }
+      const creditCardManagerAccount = await this.accountRepository
+        .findOne({ number: '2222222222222' })
+        .then((account) => account);
 
       const paymentPercentage: number =
         transactionPaymentGatewayDto.paymentPercentage *
@@ -91,12 +103,11 @@ export class TransactionService {
 
       // El Balance de la Cuenta debe ser la resta entre el monto, menos el porcentaje de la pasarela, menos el porcentaje de la transaccion
       const totalAmountTransaction =
-        sourceAccount.balance -
-        (transactionPaymentGatewayDto.amount +
-          paymentPercentage +
-          transactionFeePorcentage);
+        Number(transactionPaymentGatewayDto.amount) +
+        Number(paymentPercentage) +
+        Number(transactionFeePorcentage);
       //AQUI HAY UN BUG
-      if (sourceAccount.balance < transactionPaymentGatewayDto.amount) {
+      if (sourceAccount.balance < totalAmountTransaction) {
         this.accountService.rejectAccount(sourceAccount.number);
         throw new HttpException(
           {
@@ -119,9 +130,8 @@ export class TransactionService {
       destinationAccount.balance = destinationBalance;
       paymentAccount.balance = paymentBalance;
 
-      await this.accountRepository.save(sourceAccount);
+      //Le agregamos el dinero a la cuenta de destino
       await this.accountRepository.save(destinationAccount);
-      await this.accountRepository.save(paymentAccount);
 
       const transactionSource = this.transactionRepository.create({
         amount: transactionPaymentGatewayDto.amount,
@@ -130,7 +140,14 @@ export class TransactionService {
         type: 'decrease',
         account: sourceAccount,
       });
+      await this.transactionRepository.save(transactionSource);
 
+      // Le cobramos la comision de la transaccion
+      const sourcePayments =
+        Number(sourceAccount.balance) - Number(paymentPercentage);
+      sourceAccount.balance = sourcePayments;
+      // Le cobramos la comision de la pasarela de pagos
+      await this.accountRepository.save(sourceAccount);
       const transactionSourcePaymentGateway = this.transactionRepository.create(
         {
           amount: paymentPercentage,
@@ -140,6 +157,25 @@ export class TransactionService {
           account: sourceAccount,
         },
       );
+      await this.transactionRepository.save(transactionSourcePaymentGateway);
+
+      // Le cobramos la comision de la transaccion Fee
+      const sourcePaymentsFee =
+        Number(sourceAccount.balance) - Number(transactionFeePorcentage);
+      sourceAccount.balance = sourcePaymentsFee;
+      // Le cobramos la comision de la pasarela de pagos
+      await this.accountRepository.save(sourceAccount);
+      const transactionSourcePaymentFee = this.transactionRepository.create({
+        amount: transactionFeePorcentage,
+        oldBalance: sourceAccount.balance + transactionFeePorcentage,
+        currentBalance: sourceAccount.balance,
+        type: 'decrease',
+        account: sourceAccount,
+      });
+      await this.transactionRepository.save(transactionSourcePaymentFee);
+
+      //Le quitamos el dinero a la cuenta fuente
+      await this.accountRepository.save(sourceAccount);
 
       const transactionDestination = this.transactionRepository.create({
         amount: transactionPaymentGatewayDto.amount,
@@ -150,6 +186,11 @@ export class TransactionService {
         account: destinationAccount,
       });
 
+      await this.transactionRepository.save(transactionDestination);
+
+      //Le agregamos el dinero a la cuenta de la pasarela de pago
+      await this.accountRepository.save(paymentAccount);
+
       const transactionPaymentGateway = this.transactionRepository.create({
         amount: paymentPercentage,
         oldBalance: paymentAccount.balance - paymentPercentage,
@@ -158,13 +199,31 @@ export class TransactionService {
         account: paymentAccount,
       });
 
-      await this.transactionRepository.save(transactionSource);
-      await this.transactionRepository.save(transactionDestination);
       await this.transactionRepository.save(transactionPaymentGateway);
+
+      //Le agregamos el dinero a la cuenta del credit card manager del transaction fee
+      const destinationPaymentsFee =
+        Number(creditCardManagerAccount.balance) +
+        Number(transactionFeePorcentage);
+      creditCardManagerAccount.balance = destinationPaymentsFee;
+      await this.accountRepository.save(creditCardManagerAccount);
+
+      const transactionDestinationPaymentFee =
+        this.transactionRepository.create({
+          amount: transactionFeePorcentage,
+          oldBalance:
+            creditCardManagerAccount.balance - transactionFeePorcentage,
+          currentBalance: creditCardManagerAccount.balance,
+          type: 'increase',
+          account: creditCardManagerAccount,
+        });
+
+      await this.transactionRepository.save(transactionDestinationPaymentFee);
 
       return {
         code: HttpStatus.OK,
         status: HttpStatus.OK,
+        referenceNumber: transactionSource.id,
         message: 'Transaction successful',
       };
     } catch (error) {
