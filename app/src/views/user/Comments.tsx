@@ -27,7 +27,7 @@ function Comments() {
     const data = new FormData(event.currentTarget as HTMLFormElement);
 
     try {
-      const response = await fetch("http://localhost:3003/api/review", {
+      const response = await fetch("http://3.144.202.200:3016/api/review", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +60,7 @@ function Comments() {
     const fetchComments = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3003/api/review?limit=100"
+          "http://3.144.202.200:3016/api/review?limit=100"
         );
         if (!response.ok) {
           throw new Error("Error al cargar los comentarios");

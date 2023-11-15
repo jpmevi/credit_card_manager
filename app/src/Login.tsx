@@ -38,7 +38,7 @@ export default function SignIn() {
     const data = new FormData(event.currentTarget as HTMLFormElement);
     const username = data.get("username") as string;
     try {
-      const response = await fetch("http://localhost:3003/api/auth/login", {
+      const response = await fetch("http://3.144.202.200:3016/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

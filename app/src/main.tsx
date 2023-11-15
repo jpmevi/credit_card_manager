@@ -8,6 +8,7 @@ import AppLogout from "./AppLogOut.tsx";
 import AppUser from "./AppUser.tsx";
 import PinReminder from "./views/logout/PinReminder.tsx";
 import Comments from "./views/user/Comments.tsx";
+import AccountMovements from "./views/user/AccountMovements.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <Route path="/dashboard-admin" element={<App />} />
       <Route path="/dashboard-user" element={<AppUser />} />
       <Route path="/accountList" element={<AccountList />} />
+      <Route path="/accountMovements" element={<AccountMovements />} />
       <Route path="/comments" element={<Comments />} />
     </Routes>
   </BrowserRouter>

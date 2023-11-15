@@ -28,26 +28,19 @@ interface Data {
 
 interface StickyHeadTableProps {
   columns: Column[];
-  rows: Data[];
+  rows: any[];
   actions?: Action[];
+  page: number;
+  rowsPerPage: number;
+  handleChangePage: (event: unknown, newPage: number) => void;
+  handleChangeRowsPerPage: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function StickyHeadTable(props: StickyHeadTableProps) {
-  const { columns, rows, actions } = props;
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
+  const { columns, rows, actions, page, rowsPerPage, handleChangePage, handleChangeRowsPerPage } = props;
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
+  
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 440 }}>

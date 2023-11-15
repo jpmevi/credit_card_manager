@@ -21,7 +21,7 @@ function AppLogout() {
     const fetchComments = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3003/api/review?limit=2"
+          "http://3.144.202.200:3016/api/review?limit=2"
         );
         const data = await response.json();
         if (data.statusCode === 401) {

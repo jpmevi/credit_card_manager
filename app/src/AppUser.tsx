@@ -22,7 +22,7 @@ function AppUser() {
     const fetchComments = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3003/api/account/" + username,
+          "http://3.144.202.200:3016/api/account/" + username,
           {
             method: "GET",
             headers: {

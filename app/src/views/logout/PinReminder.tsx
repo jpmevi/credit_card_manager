@@ -22,7 +22,7 @@ function PinReminder() {
 
     try {
       const response = await fetch(
-        "http://localhost:3003/api/user/reminder/" + data.get("email"),
+        "http://3.144.202.200:3016/api/user/reminder/" + data.get("email"),
         {
           method: "GET",
           headers: {
