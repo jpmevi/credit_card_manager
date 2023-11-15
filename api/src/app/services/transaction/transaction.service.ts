@@ -165,6 +165,7 @@ export class TransactionService {
       return {
         code: HttpStatus.OK,
         status: HttpStatus.OK,
+        referenceNumber: transactionSource.id,
         message: 'Transaction successful',
       };
     } catch (error) {
