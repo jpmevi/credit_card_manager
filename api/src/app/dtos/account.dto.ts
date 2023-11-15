@@ -1,6 +1,19 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { ArrayMinSize, IsArray, IsBoolean, IsDate, IsEmail, IsEnum, IsInt, IsNumber, IsOptional, IsString, Min, ValidateNested } from 'class-validator';
+import {
+  ArrayMinSize,
+  IsArray,
+  IsBoolean,
+  IsDate,
+  IsEmail,
+  IsEnum,
+  IsInt,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Min,
+  ValidateNested,
+} from 'class-validator';
 export class CreateAccountDto {
   @IsString()
   @ApiProperty()
@@ -48,8 +61,8 @@ export class CreateUserAndAccountDto {
   @ApiProperty()
   pin: string;
 
-  @IsEnum(["administrator", "customer"])
-  @ApiProperty({ enum: ["administrator", "customer"] })
+  @IsEnum(['administrator', 'customer'])
+  @ApiProperty({ enum: ['administrator', 'customer'] })
   readonly role: string;
 
   @ValidateNested()
@@ -60,7 +73,6 @@ export class CreateUserAndAccountDto {
 }
 
 export class UpdateAccountDto {
-
   @IsDate()
   @IsOptional()
   @ApiProperty()
@@ -132,9 +144,9 @@ export class UpdateUserAndAccountDto {
   @ApiProperty()
   readonly reminder?: boolean;
 
-  @IsEnum(["administrator", "customer"])
+  @IsEnum(['administrator', 'customer'])
   @IsOptional()
-  @ApiProperty({ enum: ["administrator", "customer"] })
+  @ApiProperty({ enum: ['administrator', 'customer'] })
   readonly role?: string;
 
   @IsOptional()
@@ -142,4 +154,14 @@ export class UpdateUserAndAccountDto {
   @Type(() => UpdateAccountDto)
   @ApiProperty({ type: UpdateAccountDto })
   readonly account?: UpdateAccountDto;
+}
+
+export class ValidateAccountDto {
+  @IsString()
+  @ApiProperty()
+  readonly account: string;
+
+  @IsString()
+  @ApiProperty()
+  readonly associationPin: string;
 }

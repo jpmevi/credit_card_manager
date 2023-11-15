@@ -31,10 +31,12 @@ import { AccountLogService } from './app/services/account-log/account-log.servic
 import { ReviewService } from './app/services/review/review.service';
 import { ReviewController } from './app/controllers/review/review.controller';
 import { ReportController } from './app/controllers/report/report.controller';
+import { BankController } from './app/controllers/bank/bank.controller';
 import { ReportService } from './app/services/report/report.service';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './app/controllers/auth/auth.controller';
 import { AuthService } from './app/services/auth/auth.service';
+import { TransactionService } from './app/services/transaction/transaction.service';
 import { AuthGuard } from './app/guards/auth.guard';
 
 @Module({
@@ -75,6 +77,7 @@ import { AuthGuard } from './app/guards/auth.guard';
     ReviewController,
     UserController,
     AuthController,
+    BankController,
   ],
   providers: [
     UserService,
@@ -91,6 +94,7 @@ import { AuthGuard } from './app/guards/auth.guard';
     ReportService,
     ReviewService,
     AuthService,
+    TransactionService,
   ],
   exports: [TypeOrmModule, EmailService],
 })
