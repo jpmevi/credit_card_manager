@@ -1,6 +1,7 @@
 import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Account } from 'src/app/entities/Account.entity';
+import { AccountLog } from 'src/app/entities/AccountLog.entity';
 import { Transaction } from 'src/app/entities/Transaction.entity';
 import { Repository, getRepository } from 'typeorm';
 
@@ -8,7 +9,9 @@ import { Repository, getRepository } from 'typeorm';
 export class ReportService {
 
     constructor(@InjectRepository(Account) private reportRepository: Repository<Account>,
-        @InjectRepository(Transaction) private transactionRepository: Repository<Transaction>) { }
+        @InjectRepository(Transaction) private transactionRepository: Repository<Transaction>,
+        @InjectRepository(AccountLog) private accountLogRepository: Repository<AccountLog>
+        ) { }
 
     /**
      * This method counts the number of accounts and group them by status.
@@ -54,6 +57,28 @@ export class ReportService {
         return await this.transactionRepository.createQueryBuilder("transaction")
             .select('*')
             .where(`account_number = ${number}`)
+            .getRawMany();
+    }
+
+    /**
+     * This method counts the number of accounts and group them by status.
+     * @returns [{amount: number, status: string}]
+     */
+    async getDeletedAccounts(): Promise<any[]> {
+        return await this.accountLogRepository.createQueryBuilder("account_log")
+            .select(`*`)
+            .where(`status = 'deleted'`)
+            .getRawMany();
+    }
+
+    /**
+     * This method counts the number of accounts and group them by status.
+     * @returns [{amount: number, status: string}]
+     */
+    async getDisabledAccounts(): Promise<any[]> {
+        return await this.accountLogRepository.createQueryBuilder("account_log")
+            .select(`*`)
+            .where(`status = 'disabled'`)
             .getRawMany();
     }
 

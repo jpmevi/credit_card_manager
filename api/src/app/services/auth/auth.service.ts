@@ -10,9 +10,7 @@ import { PaginationDto } from 'src/app/dtos/pagination.dto';
 import { User } from 'src/app/entities/User.entity';
 import { UserService } from '../user/user.service';
 import { AuthDto } from 'src/app/dtos/auth.dto ';
-import { Like, Repository } from 'typeorm';
-import { EmailService } from '../email/email.service';
-import { Response } from 'express';
+import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
@@ -55,6 +53,4 @@ export class AuthService {
       role: user.role,
     };
   }
-
- 
 }
