@@ -1,5 +1,6 @@
 import "./App.css";
 import BasicCard from "./components/Card";
+import BasicCreditCard from "./components/CreditCard";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import ResponsiveDrawerUser from "./components/SidebarUser";
@@ -49,12 +50,13 @@ function AppUser() {
   return (
     <div className="appUserContainer">
       <ResponsiveDrawerUser />
+      <div className="separator-y"></div>
       <Typography variant="h6" noWrap component="div" fontWeight="bold">
         TUS CUENTAS
       </Typography>
       <div className="creditCardContainer">
         {accounts.map((account, index) => (
-          <BasicCard
+          <BasicCreditCard
             key={index}
             title={account.number}
             description={account.doe}
@@ -65,6 +67,8 @@ function AppUser() {
           />
         ))}
       </div>
+
+      <div className="top-separator"></div>
       <Typography variant="h6" noWrap component="div" fontWeight="bold">
         ACCIONES
       </Typography>

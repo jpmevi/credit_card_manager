@@ -82,9 +82,6 @@ export default function ResponsiveDrawer(props: Props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Portal Financiero
-          </Typography>
         </Toolbar>
       </AppBar>
       <Box
@@ -123,6 +120,10 @@ export default function ResponsiveDrawer(props: Props) {
           }}
           open
         >
+          <div className="titulo-sidebar">
+              <div className="bloque-amarillo-2"></div>
+              <h1 className="titulo-sidebar">Portal financiero</h1>
+          </div>
           <div
             style={{
               display: "flex",

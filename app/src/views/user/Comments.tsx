@@ -117,15 +117,17 @@ function Comments() {
               }}
             />
           </div>
-
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Crear Comentario
-          </Button>
+          <div className="input-container-submit">
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Crear Comentario
+            </Button>
+          </div>
+          
         </Box>
       </div>
     </div>

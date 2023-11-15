@@ -4,6 +4,7 @@ import ResponsiveDrawerLogOut from "./components/SidebarLogOut";
 import MessageIcon from "@mui/icons-material/Message";
 import BasicCard from "./components/Card";
 import { useNavigate } from "react-router-dom";
+import { GoCodeReview }  from "react-icons/go";
 
 function AppLogout() {
   interface Comment {
@@ -41,11 +42,13 @@ function AppLogout() {
 
   return (
     <div className="appContainer">
+      
       <ResponsiveDrawerLogOut />
       <div className="elementsContainer">
-        <Typography variant="h6" noWrap component="div" fontWeight="bold">
-          MIRA LO QUE NUESTROS CLIENTES DICEN DE NOSOTROS
-        </Typography>
+        <GoCodeReview  size={40}/>
+        <span className="title-logout">
+        MIRA LO QUE NUESTROS CLIENTES DICEN DE NOSOTROS
+        </span>
         <div className="comentarioContainer">
           {comments.map((comment, index) => (
             <BasicCard
