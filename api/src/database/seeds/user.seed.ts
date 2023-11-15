@@ -61,6 +61,19 @@ export default class CreateUsers implements Seeder {
       notifyMe: false,
       reminder: false,
     });
+
+    const userTestEcommerce = await factory(User)().create({
+      username: 'user-ecommerce',
+      cui: '1234567890101',
+      email: 'userecommerce@creditcardmanager.com',
+      firstName: 'Ecommerce',
+      lastName: 'User Test',
+      dob: new Date('2000-01-01'),
+      pin: 'admin',
+      role: 'customer',
+      notifyMe: false,
+      reminder: false,
+    });
     const users = await factory(User)().createMany(10);
 
     const currencies = await Promise.all([
@@ -102,6 +115,7 @@ export default class CreateUsers implements Seeder {
       cvv: '123',
       rejections: 0, // Establecer un límite específico para el administrador
       limit: 10000,
+      balance: 1000,
     });
 
     const normalAccountAdmin = await factory(Account)({
@@ -112,6 +126,7 @@ export default class CreateUsers implements Seeder {
       cvv: '456',
       rejections: 0,
       limit: 10000,
+      balance: 1000,
     });
 
     await factory(Transaction)({ account: normalAccountAdmin }).createMany(10);
@@ -125,6 +140,7 @@ export default class CreateUsers implements Seeder {
       cvv: '123',
       rejections: 0,
       limit: 10000,
+      balance: 1000,
     });
 
     const goldAccountPaymentGatewayUser = await factory(Account)({
@@ -135,6 +151,7 @@ export default class CreateUsers implements Seeder {
       cvv: '456',
       rejections: 0,
       limit: 10000,
+      balance: 1000,
     });
 
     await factory(Transaction)({
@@ -154,6 +171,7 @@ export default class CreateUsers implements Seeder {
       cvv: '123',
       rejections: 0,
       limit: 10000,
+      balance: 1000,
     });
 
     const goldAccountEcommerceUser = await factory(Account)({
@@ -164,6 +182,7 @@ export default class CreateUsers implements Seeder {
       cvv: '456',
       rejections: 0,
       limit: 10000,
+      balance: 1000,
     });
 
     await factory(Transaction)({
@@ -183,6 +202,7 @@ export default class CreateUsers implements Seeder {
       cvv: '123',
       rejections: 0,
       limit: 10000,
+      balance: 1000,
     });
 
     const goldAccountEcommerceUser2 = await factory(Account)({
@@ -193,6 +213,7 @@ export default class CreateUsers implements Seeder {
       cvv: '456',
       rejections: 0,
       limit: 10000,
+      balance: 1000,
     });
 
     await factory(Transaction)({
@@ -200,6 +221,37 @@ export default class CreateUsers implements Seeder {
     }).createMany(10);
     await factory(Transaction)({
       account: goldAccountEcommerceUser2,
+    }).createMany(10);
+
+    // Crear cuentas para userTestEcommerce
+
+    const normalAccountUserTestEcommerce = await factory(Account)({
+      user: userTestEcommerce,
+      accountType: accountTypes[1],
+    }).create({
+      number: '9999999999999',
+      cvv: '123',
+      rejections: 0,
+      limit: 10000,
+      balance: 10000,
+    });
+
+    const goldAccountUserTestEcommerce = await factory(Account)({
+      user: userTestEcommerce,
+      accountType: accountTypes[0],
+    }).create({
+      number: '0000000000000',
+      cvv: '456',
+      rejections: 0,
+      limit: 10000,
+      balance: 10000,
+    });
+
+    await factory(Transaction)({
+      account: normalAccountUserTestEcommerce,
+    }).createMany(10);
+    await factory(Transaction)({
+      account: goldAccountUserTestEcommerce,
     }).createMany(10);
 
     // Crear revisiones para usuarios
