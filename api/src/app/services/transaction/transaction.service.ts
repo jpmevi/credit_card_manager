@@ -56,6 +56,15 @@ export class TransactionService {
           HttpStatus.NOT_FOUND,
         );
       }
+      if (sourceAccount.status == 'disabled') {
+        throw new HttpException(
+          {
+            status: HttpStatus.NOT_FOUND,
+            message: `Account is disabled`,
+          },
+          HttpStatus.NOT_FOUND,
+        );
+      }
       const destinationAccount = await this.accountRepository
         .findOne({ number: transactionPaymentGatewayDto.destinationAccount })
         .then((account) => account);
@@ -94,10 +103,9 @@ export class TransactionService {
 
       // El Balance de la Cuenta debe ser la resta entre el monto, menos el porcentaje de la pasarela, menos el porcentaje de la transaccion
       const totalAmountTransaction =
-        sourceAccount.balance -
-        (transactionPaymentGatewayDto.amount +
-          paymentPercentage +
-          transactionFeePorcentage);
+        Number(transactionPaymentGatewayDto.amount) +
+        Number(paymentPercentage) +
+        Number(transactionFeePorcentage);
       //AQUI HAY UN BUG
       if (sourceAccount.balance < totalAmountTransaction) {
         this.accountService.rejectAccount(sourceAccount.number);
