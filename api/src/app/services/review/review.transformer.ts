@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Review } from 'src/app/entities/Review.entity';
+import { Review } from '../../entities/Review.entity';
 
 @Injectable()
 export class ReviewsTramsformer {

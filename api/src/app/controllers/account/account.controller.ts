@@ -14,11 +14,11 @@ import { Response } from 'express';
 import {
   CreateUserAndAccountDto,
   UpdateUserAndAccountDto,
-} from 'src/app/dtos/account.dto';
-import { PaginationDto } from 'src/app/dtos/pagination.dto';
+} from '../../dtos/account.dto';
+import { PaginationDto } from '../../dtos/pagination.dto';
 import { Account } from 'src/app/entities/Account.entity';
-import { AccountLogService } from 'src/app/services/account-log/account-log.service';
-import { AccountService } from 'src/app/services/account/account.service';
+import { AccountLogService } from '../../services/account-log/account-log.service';
+import { AccountService } from '../../services/account/account.service';
 
 @ApiTags('Account')
 @Controller('account')

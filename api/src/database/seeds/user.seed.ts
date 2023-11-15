@@ -1,12 +1,11 @@
 import { Factory, Seeder } from 'typeorm-seeding';
 import { Connection } from 'typeorm';
-import { User } from 'src/app/entities/User.entity';
-import { Account } from 'src/app/entities/Account.entity';
-import { AccountType } from 'src/app/entities/AccountType.entity';
-import { Currency } from 'src/app/entities/Currency.entity';
-import { Transaction } from 'src/app/entities/Transaction.entity';
-import { Review } from 'src/app/entities/Review.entity';
-import { array } from 'joi';
+import { User } from '../../app/entities/User.entity';
+import { Account } from '../../app/entities/Account.entity';
+import { AccountType } from '../../app/entities/AccountType.entity';
+import { Currency } from '../../app/entities/Currency.entity';
+import { Transaction } from '../../app/entities/Transaction.entity';
+import { Review } from '../../app/entities/Review.entity';
 
 export default class CreateUsers implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<void> {

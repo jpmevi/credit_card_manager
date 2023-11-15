@@ -1,7 +1,7 @@
 import { define, factory } from 'typeorm-seeding';
-import { Account } from 'src/app/entities/Account.entity';
-import { User } from 'src/app/entities/User.entity';
-import { AccountType } from 'src/app/entities/AccountType.entity';
+import { Account } from '../../app/entities/Account.entity';
+import { User } from '../../app/entities/User.entity';
+import { AccountType } from '../../app/entities/AccountType.entity';
 import * as Faker from 'faker';
 
 define(Account, (faker: typeof Faker, context: { user: User; accountType: AccountType }) => {

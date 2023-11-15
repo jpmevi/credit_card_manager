@@ -1,5 +1,5 @@
 import * as Faker from 'faker';
-import { User } from 'src/app/entities/User.entity';
+import { User } from '../../app/entities/User.entity';
 import { define } from 'typeorm-seeding';
 
 define(User, (faker: typeof Faker) => {

@@ -1,12 +1,12 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
-import { CreateReviewDto, UpdateReviewDto } from 'src/app/dtos/review.dto';
-import { PaginationDto } from 'src/app/dtos/pagination.dto';
-import { Review } from 'src/app/entities/Review.entity';
-import { ReviewService } from 'src/app/services/review/review.service';
+import { CreateReviewDto, UpdateReviewDto } from '../../dtos/review.dto';
+import { PaginationDto } from '../../dtos/pagination.dto';
+import { Review } from '../../entities/Review.entity';
+import { ReviewService } from '../../services/review/review.service';
 import { AuthGuard } from 'src/app/guards/auth.guard';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { SetMetadata } from '@nestjs/common';
 
 export const IS_PUBLIC_KEY = 'isPublic';

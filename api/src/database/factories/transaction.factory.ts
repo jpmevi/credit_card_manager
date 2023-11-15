@@ -1,6 +1,6 @@
 import * as Faker from 'faker';
-import { Account } from 'src/app/entities/Account.entity';
-import { Transaction } from 'src/app/entities/Transaction.entity';
+import { Account } from '../../app/entities/Account.entity';
+import { Transaction } from '../../app/entities/Transaction.entity';
 import { define } from 'typeorm-seeding';
 
 define(Transaction, (faker: typeof Faker, context: { account: Account }) => {
