@@ -101,6 +101,7 @@ export default class CreateUsers implements Seeder {
       number: '1111111111111',
       cvv: '123',
       rejections: 0, // Establecer un límite específico para el administrador
+      limit: 10000,
     });
 
     const normalAccountAdmin = await factory(Account)({
@@ -109,7 +110,8 @@ export default class CreateUsers implements Seeder {
     }).create({
       number: '2222222222222',
       cvv: '456',
-      rejections: 0, // Establecer un límite específico para el administrador
+      rejections: 0,
+      limit: 10000,
     });
 
     await factory(Transaction)({ account: normalAccountAdmin }).createMany(10);
@@ -122,6 +124,7 @@ export default class CreateUsers implements Seeder {
       number: '3333333333333',
       cvv: '123',
       rejections: 0,
+      limit: 10000,
     });
 
     const goldAccountPaymentGatewayUser = await factory(Account)({
@@ -131,6 +134,7 @@ export default class CreateUsers implements Seeder {
       number: '4444444444444',
       cvv: '456',
       rejections: 0,
+      limit: 10000,
     });
 
     await factory(Transaction)({
@@ -149,6 +153,7 @@ export default class CreateUsers implements Seeder {
       number: '5555555555555',
       cvv: '123',
       rejections: 0,
+      limit: 10000,
     });
 
     const goldAccountEcommerceUser = await factory(Account)({
@@ -158,6 +163,7 @@ export default class CreateUsers implements Seeder {
       number: '6666666666666',
       cvv: '456',
       rejections: 0,
+      limit: 10000,
     });
 
     await factory(Transaction)({
@@ -176,6 +182,7 @@ export default class CreateUsers implements Seeder {
       number: '7777777777777',
       cvv: '123',
       rejections: 0,
+      limit: 10000,
     });
 
     const goldAccountEcommerceUser2 = await factory(Account)({
@@ -185,6 +192,7 @@ export default class CreateUsers implements Seeder {
       number: '8888888888888',
       cvv: '456',
       rejections: 0,
+      limit: 10000,
     });
 
     await factory(Transaction)({

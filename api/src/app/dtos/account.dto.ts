@@ -159,9 +159,9 @@ export class UpdateUserAndAccountDto {
 export class ValidateAccountDto {
   @IsString()
   @ApiProperty()
-  readonly number: string;
+  readonly account: string;
 
   @IsString()
   @ApiProperty()
-  readonly cvv: string;
+  readonly associationPin: string;
 }

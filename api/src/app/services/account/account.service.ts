@@ -146,20 +146,20 @@ export class AccountService {
   async validateAccount(validateAccountDto: ValidateAccountDto) {
     try {
       const account = await this.accountRepository
-        .findOne({ number: validateAccountDto.number })
+        .findOne({ number: validateAccountDto.account })
         .then((account) => account);
       if (account == null) {
         throw new HttpException(
           {
             status: HttpStatus.NOT_FOUND,
-            message: `No account found for number: ${validateAccountDto.number}`,
+            message: `No account found for number: ${validateAccountDto.account}`,
           },
           HttpStatus.NOT_FOUND,
         );
       }
 
       const validateCvv = await bcrypt.compare(
-        validateAccountDto.cvv,
+        validateAccountDto.associationPin,
         account.cvv,
       );
 
@@ -167,7 +167,7 @@ export class AccountService {
         throw new HttpException(
           {
             status: HttpStatus.NOT_FOUND,
-            message: `Invalid cvv`,
+            message: `Invalid associationPin`,
           },
           HttpStatus.OK,
         );
