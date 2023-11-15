@@ -24,7 +24,7 @@ export class AuthController {
 
   @ApiResponse({
     status: 201,
-    description: 'Sign In Successful. Token generated.',
+    description: 'Log In Successful. Token generated.',
   })
   @ApiResponse({
     status: 404,
@@ -37,6 +37,12 @@ export class AuthController {
   signIn(@Body() authDto: AuthDto) {
     return this.authService.logIn(authDto.username, authDto.pin);
   }
+
+  @ApiResponse({
+    status: 200,
+    description: 'Log Out Successful.',
+  })
+  @ApiResponse({ status: 401, description: 'Unauthorized.' })
 
   @Post('logout')
   async logout(@Request() req): Promise<{}> {

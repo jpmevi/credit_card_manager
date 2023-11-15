@@ -27,7 +27,7 @@ export class AuthDto {
   readonly pin: string;
 
   @IsOptional()
-  @ApiProperty()
+  //@ApiProperty()
   user: User;
 
 }

@@ -36,6 +36,7 @@ import { ReportService } from './app/services/report/report.service';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './app/controllers/auth/auth.controller';
 import { AuthService } from './app/services/auth/auth.service';
+import { TransactionService } from './app/services/transaction/transaction.service';
 import { AuthGuard } from './app/guards/auth.guard';
 
 @Module({
@@ -93,6 +94,7 @@ import { AuthGuard } from './app/guards/auth.guard';
     ReportService,
     ReviewService,
     AuthService,
+    TransactionService,
   ],
   exports: [TypeOrmModule, EmailService],
 })

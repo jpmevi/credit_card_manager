@@ -15,6 +15,7 @@ import {
   UpdateUserAndAccountDto,
   ValidateAccountDto,
 } from '../../dtos/account.dto';
+import { TransactionPaymentGatewayDto } from '../../dtos/transaction.dto';
 import { AccountType } from '../../entities/AccountType.entity';
 import { User } from '../../entities/User.entity';
 import { Response } from 'express';
@@ -95,7 +96,9 @@ export class AccountService {
       .then((account) => account);
     if (account == null) throw new NotFoundException('Account not found');
     account.status = status;
-    //account.rejections = 0;
+    if (status === 'enabled') {
+      account.rejections = 0;
+    }
     await this.accountRepository.save(account);
     if (status !== 'deleted') {
       this.accountLogService.createLog(
@@ -115,10 +118,9 @@ export class AccountService {
       .findOne({ number: number })
       .then((account) => account);
     if (account == null) throw new NotFoundException('Account not found');
+    account.rejections += 1;
     if (account.rejections === 3) {
       account.status = 'disabled';
-    } else {
-      account.rejections += 1;
     }
     await this.accountRepository.save(account);
 
@@ -127,6 +129,13 @@ export class AccountService {
       'rejected',
       account,
     );
+    if (account.status === 'disabled') {
+      this.accountLogService.createLog(
+        `Account ${number} has been disabled`,
+        'disabled',
+        account,
+      );
+    }
   }
 
   /**
