@@ -16,7 +16,7 @@ import {
   UpdateUserAndAccountDto,
 } from '../../dtos/account.dto';
 import { PaginationDto } from '../../dtos/pagination.dto';
-import { Account } from 'src/app/entities/Account.entity';
+import { Account } from '../../entities/Account.entity';
 import { AccountLogService } from '../../services/account-log/account-log.service';
 import { AccountService } from '../../services/account/account.service';
 

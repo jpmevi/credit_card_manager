@@ -10,7 +10,11 @@ import { PaginationDto } from '../../dtos/pagination.dto';
 import { Account } from '../../entities/Account.entity';
 import { Like, Not, Repository } from 'typeorm';
 import { AccountLogService } from '../account-log/account-log.service';
-import { CreateUserAndAccountDto, UpdateUserAndAccountDto } from '../../dtos/account.dto';
+import {
+  CreateUserAndAccountDto,
+  UpdateUserAndAccountDto,
+  ValidateAccountDto,
+} from '../../dtos/account.dto';
 import { AccountType } from '../../entities/AccountType.entity';
 import { User } from '../../entities/User.entity';
 import { Response } from 'express';
@@ -125,13 +129,52 @@ export class AccountService {
     );
   }
 
-  async validateAccount(number: string, cvv: string): Promise<Account> {
-    const account = await this.accountRepository
-      .findOne({ number: number })
-      .then((account) => account);
-    if (account == null) throw new NotFoundException('Account not found');
-    if (account.cvv !== cvv) throw new NotFoundException('CVV not found');
-    return account;
+  /**
+   * Validate if the account exists and if the cvv is correct
+   * @param validateAccountDto
+   * @returns
+   */
+  async validateAccount(validateAccountDto: ValidateAccountDto) {
+    try {
+      const account = await this.accountRepository
+        .findOne({ number: validateAccountDto.number })
+        .then((account) => account);
+      if (account == null) {
+        throw new HttpException(
+          {
+            status: HttpStatus.NOT_FOUND,
+            message: `No account found for number: ${validateAccountDto.number}`,
+          },
+          HttpStatus.NOT_FOUND,
+        );
+      }
+
+      const validateCvv = await bcrypt.compare(
+        validateAccountDto.cvv,
+        account.cvv,
+      );
+
+      if (!validateCvv) {
+        throw new HttpException(
+          {
+            status: HttpStatus.NOT_FOUND,
+            message: `Invalid cvv`,
+          },
+          HttpStatus.OK,
+        );
+      }
+      return {
+        code: HttpStatus.OK,
+        status: HttpStatus.CONTINUE,
+        message: 'Successfully validated account',
+      };
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      } else {
+        throw new BadRequestException(error);
+      }
+    }
   }
 
   /**

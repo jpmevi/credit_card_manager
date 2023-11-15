@@ -56,8 +56,8 @@ export class Account {
   @OneToMany(() => Transaction, (transaction) => transaction.account)
   transactions: Transaction[]
 
-  // @BeforeInsert()
-  // async hashPassword() {
-  //   this.cvv = await bcrypt.hash(this.cvv, 10);
-  // }
+  @BeforeInsert()
+  async hashPassword() {
+    this.cvv = await bcrypt.hash(this.cvv, 10);
+  }
 }
